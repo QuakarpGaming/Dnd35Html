@@ -1,0 +1,2975 @@
+<html>
+    <Head>
+        <title>The only Sheet you need!</title>
+        <link rel="Stylesheet" href="Styles.css">
+    </Head>
+    <body>
+        <input type="file" id="fileElem" accept=".json,.JSON,.txt" class="visually-hidden" onchange="CompleteUpload()"/>
+        <fieldset class="BoxWithBorder" style="height: 1em; align-items: baseline; min-Height: fit-content;">
+            <div class="BoxRow BoxRowMaxWidth">
+                <div class="BoxColumn">
+                    <label class="TopLabel">Character:<input type="checkbox" id="showCharData" checked onchange="HideShow('characterData',this.checked)"></label>
+                </div>
+                <div class="BoxColumn">
+                    <label class="TopLabel">Spells<input type="checkbox" id="showSpells" checked onchange="HideShow('spells',this.checked)"></label>
+                </div>
+                <div class="BoxColumn col-7"><button onclick="Save(true)">Save(Broswer)</button></div>
+                <div class="BoxColumn col-7"><button onclick="LoadUsingBroswer()">Load(Broswer)</button></div>
+                <div class="BoxColumn col-7"><button onclick="Save(false)">Save(File)</button></div>
+                <div class="BoxColumn col-7"><button onclick="Load()">Load(File)</button></div>
+                <div class="BoxColumn col-7"><button onclick="Clear(true)">Clear(Broswer)</button></div>
+                <div class="BoxColumn col-7"><button onclick="Clear(false)">Clear(Sheet)</button></div>
+            </div>
+        </fieldset>
+        <div class="outerBox">
+            <!--CharacterData-->
+            <fieldset class="BoxWithBorder" id="characterData">
+                <legend>Character</legend>
+                <div class="BoxRow">
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Character Name:&nbsp;<input type="text" id="characterName"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Player Name:&nbsp;<input type="text" id="playerName"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Campaign&nbsp;<input type="text" id="campaign"></label>
+                    </div>
+                    <div class="BoxColumn" title="Experience Points"> 
+                        <label class="inputLabelText">EXP:&nbsp;<input type="text" id="exp"></label>
+                    </div>
+                </div>
+                <div class="BoxRow">
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Class and Level:&nbsp;<input type="text" id="classAndLevel"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Race:&nbsp;<input type="text" id="race" list="Races"></label>
+                        <datalist id="Races">
+                            <option value="Dwarf"></option>
+                            <option value="Elf"></option>
+                            <option value="Gnome"></option>
+                            <option value="Halfling"></option>
+                            <option value="Half-Elf"></option>
+                            <option value="Half-Orc"></option>
+                            <option value="Human"></option>
+                        </datalist>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Alignment:&nbsp;<input type="text" id="alignment" list="Alignments"></label>
+                        <datalist id="Alignments">
+                            <option value="Chaotic Good"></option>
+                            <option value="Chaotic Neutral"></option>
+                            <option value="Chaotic Evil"></option>
+                            <option value="Lawful Good"></option>
+                            <option value="Lawful Neutral"></option>
+                            <option value="Lawful Evil"></option>
+                            <option value="Neutral Good"></option>
+                            <option value="Neutral"></option>
+                            <option value="Neutral Evil"></option>
+                        </datalist>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Deity&nbsp;<input type="text" id="deity"></label>
+                    </div>
+                </div>
+                <div class="BoxRow">
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Size:&nbsp;<input type="text" id="size" list="Sizes"></label>
+                        <datalist id="Sizes">
+                            <option value="Small"></option>
+                            <option value="Medium"></option>
+                            <option value="Large"></option>
+                            <option value="Huge"></option>
+                        </datalist>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Age:&nbsp;<input type="text" id="age"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Gender:&nbsp;<input type="text" id="gender" list="Genders"></label>
+                        <datalist id="Genders">
+                            <option value="Male"></option>
+                            <option value="Female"></option>
+                            <option value="Fluid"></option>
+                            <option value="Other"></option>
+                        </datalist>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Height:&nbsp;<input type="text" class="inputSmall" id="height"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Weight:&nbsp;<input type="text" class="inputSmall" id="weight"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Eyes&nbsp;<input type="text" class="inputSmall" id="eyes" list="Colors"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Hair&nbsp;<input type="text" class="inputSmall" id="hair" list="Colors"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="inputLabelText">Skin&nbsp;<input type="text" class="inputSmall" id="skin" list="Colors"></label>
+                    </div>
+                    <datalist id="Colors">
+                        <option value="Black"></option>
+                        <option value="Blond"></option>
+                        <option value="Blue"></option>
+                        <option value="Brown"></option>
+                        <option value="Green"></option>
+                        <option value="Jet"></option>
+                        <option value="Red"></option>
+                        <option value="Silver"></option>
+                        <option value="White"></option>
+                    </datalist>
+                </div>
+            </fieldset>
+            <div class="BoxRow boxRowMaxWidth">
+                <!--Ability SCores-->
+                <fieldset class="BoxWithBorder col-2" id="abilityScorces">
+                    <legend>Ability Scores</legend>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Name</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Score</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Modifier</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Temp. Score</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Temp. Mod</span>
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Strength:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="str" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="strMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempStr" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempStrMod">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Dexterity:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="dex" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="dexMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempDex" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempDexMod">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Constitution:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="con" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="conMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempCon" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempConMod">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Intelligence:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="int" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="intMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempInt" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempIntMod">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Wisdom:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="wis" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="wisMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempWis" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempWisMod"">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Charisma:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="cha" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="chaMod">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="number" class="inputSmall abilityInput" id="tempCha" onchange="OnAblityScoreChange(this.id,this.value)">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5 temp">
+                            <input type="text" class="inputSmall abilityInput"  readonly tabindex="-1" disabled id="tempChaMod">
+                        </div>
+                    </div>
+                </fieldset>
+                <!--Combat Stats-->
+                <fieldset class="BoxWithBorder col-2" id="combatStats">
+                    <legend>Combat Status</legend>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Total</span>
+                        </div>
+                        <div class="BoxColumn currentHPcolumn col-5">
+                            <span class="ColumnTitle">Current HP and Wounds</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Non-Lethal Dmg</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="ColumnTitle">Speed</span>
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Hit Points:</span>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="maxHP">
+                        </div>
+                        <div class="BoxColumn currentHPcolumn col-5">
+                            <input type="text" class="inputFull" id="currentHP">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="number" class="inputSmall abilityInput" id="Non-LethalDmg">
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <input type="text" class="inputSmall" id="Speed">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-10">
+                            <span class="blackBgWhiteText justifyText" title="Armor Class">AC:</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="text" class="inputsmaller"  readonly tabindex="-1" disabled id="acTotal">
+                            <label for="acTotal" class="underInputTitle">Total</label>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <span class="justifyText" >= 10 +</span>
+                            <label for="acTotal" class="underInputTitle">&nbsp</label>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acArmor" name="acCalc" onchange="CalcAc()">
+                            <label for="acArmor" class="underInputTitle">Armor</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acDex" data-mod="dex"  readonly tabindex="-1" name="acCalc" onchange="CalcAc()">
+                            <label for="acDex" class="underInputTitle">Dex</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acSize" name="acCalc" onchange="CalcAc()">
+                            <label for="acSize" class="underInputTitle">Size</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acNatural" name="acCalc" onchange="CalcAc()">
+                            <label for="acNatural" class="underInputTitle">Natural</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acDeflection" name="acCalc" onchange="CalcAc()">
+                            <label for="acDeflection" class="underInputTitle">Deflect</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputsmaller" id="acMisc" name="acCalc" onchange="CalcAc()">
+                            <label for="acMisc" class="underInputTitle">Misc.</label>
+                        </div>
+                    </div>
+                    <div class="BoxRow  boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText" >Touch:</span>
+                        </div>
+                        <div class="BoxColumn col-5">
+                            <input type="number" class="inputsmaller" id="touchAC"  readonly tabindex="-1" disabled>
+                        </div>
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText">Flat Footed:</span>
+                        </div>
+                        <div class="BoxColumn col-5">
+                            <input type="number" class="inputsmaller" id="ffAC"  readonly tabindex="-1" disabled>
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <div class="BoxColumn ablityColumn col-5">
+                            <span class="blackBgWhiteText justifyText" >Initiative:</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="text" class="inputFull"  readonly tabindex="-1" disabled id="initTotal">
+                            <label for="acTotal" class="underInputTitle">Total</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>=</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputFull"  readonly tabindex="-1" name="initCalc" id="initDex" data-mod="dex" onchange="CalcTotal('init')">
+                            <label for="acArmor" class="underInputTitle">Dex</label>
+                        </div>
+                        <div class="BoxColumn floatMathCol">
+                            <span>+</span>
+                        </div>
+                        <div class="BoxColumn col-10">
+                            <input type="number" class="inputFull" name="initCalc" id="initMisc"  onchange="CalcTotal('init')">
+                            <label for="acArmor" class="underInputTitle">Misc.</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="skillsBox">
+                <!--Saving Throws-->
+                <fieldset class="BoxWithBorder col-2" id="savingThrows">
+                    <legend>Saving Throws</legend>
+                    <div class="BoxRow">
+                        <div class="BoxColumn savingThrowColumnName">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle">Base<br>Save</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle">Ability<br>Mod</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle">Magic<br>Mod</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle">Misc<br>Mod</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <span class="ColumnTitle">Temp<br>Mod</span>
+                        </div>
+                    </div>
+                    <div class="BoxRow">
+                        <div class="BoxColumn savingThrowColumnName">
+                            <span class="blackBgWhiteText justifyText">FORTITUDE:</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller"  readonly tabindex="-1" disabled id="fortTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="fortCalc" id="fortBase"  onchange="CalcTotal('fort')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller" name="fortCalc"  readonly tabindex="-1" disabled id="fortAbility" data-mod="con" onchange="CalcTotal('fort')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="fortCalc" id="fortMagic"  onchange="CalcTotal('fort')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="fortCalc" id="fortMisc"  onchange="CalcTotal('fort')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="fortCalc" id="fortTemp"  onchange="CalcTotal('fort')">
+                        </div>
+                    </div>
+                    <div class="BoxRow">
+                        <div class="BoxColumn savingThrowColumnName">
+                            <span class="blackBgWhiteText justifyText">REFLEX:</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller"  readonly tabindex="-1" disabled id="reflexTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="reflexCalc" id="reflexBase"  onchange="CalcTotal('reflex')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller" name="reflexCalc"  readonly tabindex="-1" disabled id="reflexAbility" data-mod="dex" onchange="CalcTotal('reflex')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="reflexCalc" id="reflexMagic"  onchange="CalcTotal('reflex')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="reflexCalc" id="reflexMisc"  onchange="CalcTotal('reflex')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="reflexCalc" id="reflexTemp"  onchange="CalcTotal('reflex')">
+                        </div>
+                    </div>
+                    <div class="BoxRow">
+                        <div class="BoxColumn savingThrowColumnName">
+                            <span class="blackBgWhiteText justifyText">WILL:</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller"  readonly tabindex="-1" disabled id="willTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="willCalc" id="willBase"  onchange="CalcTotal('will')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="text" class="inputsmaller" name="willCalc"  readonly tabindex="-1" disabled id="willAbility" data-mod="wis" onchange="CalcTotal('will')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="willCalc" id="willMagic"  onchange="CalcTotal('will')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="willCalc" id="willMisc"  onchange="CalcTotal('will')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn savingThrowColumn">
+                            <input type="number" class="inputsmaller" name="willCalc" id="willTemp"  onchange="CalcTotal('will')">
+                        </div>
+                    </div>
+                </fieldset>
+                <!--attack Info-->
+                <fieldset class="BoxWithBorder col-2" id="attInfo">
+                    <legend>Attack Info</legend>
+                    <div class="BoxRow">
+                        <div class="BoxColumn">
+                            <span class="blackBgWhiteText bgTextHeight verticalCenterText">Base Attack bonus</span>
+                        </div>
+                        <div class="BoxColumn">
+                            <input type="number" class="inputSmall abilityInput" id="bab" onchange="UpdateModBoxes('bab',this.value)">
+                        </div>
+                        <div class="BoxColumn">
+                            <span class="blackBgWhiteText bgTextHeight verticalCenterText">Spell Resistance</span>
+                        </div>
+                        <div class="BoxColumn">
+                            <input type="number" class="inputSmall abilityInput" id="spellRes">
+                        </div>
+                    </div>
+                    <div class="BoxRow">
+                        <div class="BoxColumn">
+                            <span class="blackBgWhiteText verticalCenterText">Grapple</span>
+                        </div>
+                        <div class="BoxColumn">
+                            <input type="number" readonly disabled tabindex="-1" class="inputSmall abilityInput" id="grappleTotal">
+                            <label for="grappleTotal" class="underInputTitle">Total</label>
+                            </div>
+                            <div class="BoxColumn MathColumn">
+                                <span class="ColumnTitle">=</span>
+                                <label class="underInputTitle">&nbsp;</label>
+                            </div>
+                            <div class="BoxColumn">
+                                <input type="number" readonly disabled tabindex="-1" name="grappleCalc" class="inputSmall abilityInput" id="grappleBab" data-mod="bab" onchange="CalcTotal('grapple')">
+                                <label for="grappleBab" class="underInputTitle">B.A.B</label>
+                            </div>
+                            <div class="BoxColumn MathColumn">
+                                <span class="ColumnTitle">+</span>
+                                <label class="underInputTitle">&nbsp;</label>
+                            </div>
+                            <div class="BoxColumn">
+                                <input type="number" readonly disabled tabindex="-1" name="grappleCalc" class="inputSmall abilityInput" id="grapplestr" data-mod="str" onchange="CalcTotal('grapple')">
+                                <label for="grapplestr" class="underInputTitle">Str Mod</label>
+                            </div>
+                            <div class="BoxColumn MathColumn">
+                                <span class="ColumnTitle">+</span>
+                                <label class="underInputTitle">&nbsp;</label>
+                            </div>
+                            <div class="BoxColumn">
+                                <input type="number" name="grappleCalc" class="inputSmall abilityInput" id="grappleSize" onchange="CalcTotal('grapple')">
+                                <label for="grappleSize" class="underInputTitle">Size Mod</label>
+                            </div>
+                            <div class="BoxColumn MathColumn">
+                                <span class="ColumnTitle">+</span>
+                                <label class="underInputTitle">&nbsp;</label>
+                            </div>
+                            <div class="BoxColumn">
+                                <input type="number"  name="grappleCalc" class="inputSmall abilityInput" id="grappleMisc"  onchange="CalcTotal('grapple')">
+                                <label for="grappleMisc" class="underInputTitle">Misc Mod</label>
+                            </div>
+                    </div>
+                    <div class="attDiv" name="att1">
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Attack</label>
+                                <input type="text" class="inputFull abilityInput" id="att1">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-5">
+                                <label class="underInputTitle">Attack bonus</label>
+                                <input type="text" class="inputFull abilityInput" id="att1bonus">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Damage</label>
+                                <input type="text" class="inputFull abilityInput" id="att1Dmg">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Critical</label>
+                                <input type="text" class="inputFull abilityInput" id="Att1Critcal">
+                            </div>                
+                        </div>
+                        <div class="BoxRow  boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Range</label>
+                                <input type="text" class="inputFull abilityInput" id="att1Range">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputFull abilityInput" id="att1Type">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Note</label>
+                                <input type="text" class="inputFull abilityInput" id="att1Notes">
+                            </div>              
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Ammo</label>
+                                <input type="text" class="inputFull abilityInput" id="att1Ammo">
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="attDiv" name="att2">
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Attack</label>
+                                <input type="text" class="inputFull abilityInput" id="att2">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-5">
+                                <label class="underInputTitle">Attack bonus</label>
+                                <input type="text" class="inputFull abilityInput" id="att2bonus">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Damage</label>
+                                <input type="text" class="inputFull abilityInput" id="att2Dmg">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Critical</label>
+                                <input type="text" class="inputFull abilityInput" id="Att2Critcal">
+                            </div>                
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Range</label>
+                                <input type="text" class="inputFull abilityInput" id="att2Range">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputFull abilityInput" id="att2Type">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Note</label>
+                                <input type="text" class="inputFull abilityInput" id="att2Notes">
+                            </div>              
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Ammo</label>
+                                <input type="text" class="inputFull abilityInput" id="att2Ammo">
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="attDiv" name="att3">
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Attack</label>
+                                <input type="text" class="inputFull abilityInput" id="att3">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-5">
+                                <label class="underInputTitle">Attack bonus</label>
+                                <input type="text" class="inputFull abilityInput" id="att3bonus">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Damage</label>
+                                <input type="text" class="inputFull abilityInput" id="att3Dmg">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Critical</label>
+                                <input type="text" class="inputFull abilityInput" id="Att3Critcal">
+                            </div>                
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Range</label>
+                                <input type="text" class="inputFull abilityInput" id="att3Range">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputFull abilityInput" id="att3Type">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Note</label>
+                                <input type="text" class="inputFull abilityInput" id="att3Notes">
+                            </div>              
+                        </div>
+                        <div class="BoxRow BoxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Ammo</label>
+                                <input type="text" class="inputFull abilityInput" id="att3Ammo">
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="attDiv" name="att4">
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Attack</label>
+                                <input type="text" class="inputFull abilityInput" id="att4">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-5">
+                                <label class="underInputTitle">Attack bonus</label>
+                                <input type="text" class="inputFull abilityInput" id="att4bonus">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Damage</label>
+                                <input type="text" class="inputFull abilityInput" id="att4Dmg">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Critical</label>
+                                <input type="text" class="inputFull abilityInput" id="Att4Critcal">
+                            </div>                
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Range</label>
+                                <input type="text" class="inputFull abilityInput" id="att4Range">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputFull abilityInput" id="att4Type">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Note</label>
+                                <input type="text" class="inputFull abilityInput" id="att4Notes">
+                            </div>              
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Ammo</label>
+                                <input type="text" class="inputFull abilityInput" id="att4Ammo">
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="attDiv" name="att5">
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Attack</label>
+                                <input type="text" class="inputFull abilityInput" id="att5">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-5">
+                                <label class="underInputTitle">Attack bonus</label>
+                                <input type="text" class="inputFull abilityInput" id="att5bonus">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Damage</label>
+                                <input type="text" class="inputFull abilityInput" id="att5Dmg">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-7">
+                                <label class="underInputTitle">Critical</label>
+                                <input type="text" class="inputFull abilityInput" id="Att5Critcal">
+                            </div>                
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Range</label>
+                                <input type="text" class="inputFull abilityInput" id="att5Range">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputFull abilityInput" id="att5Type">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText col-3">
+                                <label class="underInputTitle">Note</label>
+                                <input type="text" class="inputFull abilityInput" id="att5Notes">
+                            </div>              
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <div class="BoxColumn blackBGWhiteText col-2">
+                                <label class="underInputTitle">Ammo</label>
+                                <input type="text" class="inputFull abilityInput" id="att5Ammo">
+                            </div> 
+                        </div>
+                    </div>
+                </fieldset>
+                <!--Gear-->
+                <fieldset class="BoxWithBorder col-2" id="gear">
+                    <legend>Gear</legend>
+                    <div class="attDiv">
+                        <div class="BoxRow">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Armor/Protective Item</label>
+                                <input type="text" class="inputMed abilityInput inputFull" id="armor">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Type</label>
+                                <input type="text" class="inputMed abilityInput" id="armorType">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">AC bonus</label>
+                                <input type="number" class="inputMed abilityInput" id="armorAC">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Max Dex</label>
+                                <input type="number" class="inputMed abilityInput" id="armorMaxDex">
+                            </div>                
+                        </div>
+                        <div class="BoxRow">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Check Penalty</label>
+                                <input type="number" class="inputSmall abilityInput" id="armorCheckPenalty">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Spell Failure</label>
+                                <input type="number" class="inputSmall abilityInput" id="armorSpellFailure">
+                                
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Speed</label>
+                                <input type="text" class="inputSmall abilityInput" id="armorSpeed">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Weight</label>
+                                <input type="text" class="inputSmall abilityInput" id="armorWeight">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Special Props</label>
+                                <input type="text" class="inputFull abilityInput" id="armorSpecialProps">
+                            </div>             
+                        </div>
+                    </div>
+                    <div class="attDiv">
+                        <div class="BoxRow">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Shield/Protective Item</label>
+                                <input type="text" class="inputMed abilityInput inputFull" id="shield">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">AC bonus</label>
+                                <input type="number" class="inputMed abilityInput" id="shieldAC">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Weight</label>
+                                <input type="text" class="inputSmall abilityInput" id="shieldWeight">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Check Penalty</label>
+                                <input type="number" class="inputSmall abilityInput" id="shieldCheckPenalty">
+                            </div>              
+                        </div>
+                        <div class="BoxRow">
+                            
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Spell Failure</label>
+                                <input type="number" class="inputSmall abilityInput" id="shieldSpellFailure">
+                                
+                            </div>                          
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Special Props</label>
+                                <input type="text" class="inputFull abilityInput" id="shieldSpecialProps">
+                            </div>             
+                        </div>
+                    </div>
+                    <div class="attDiv">
+                        <div class="BoxRow">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Protective Item</label>
+                                <input type="text" class="inputMed abilityInput inputFull" id="protective1">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">AC bonus</label>
+                                <input type="number" class="inputMed abilityInput" id="protective1ACBonus">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Weight</label>
+                                <input type="text" class="inputSmall abilityInput" id="Weight">
+                            </div>                          
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Special Props</label>
+                                <input type="text" class="inputFull abilityInput" id="protective1Props">
+                            </div>             
+                        </div>
+                    </div>
+                    <div class="attDiv">
+                        <div class="BoxRow">
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Protective Item</label>
+                                <input type="text" class="inputMed abilityInput inputFull" id="protective2">
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">AC bonus</label>
+                                <input type="number" class="inputMed abilityInput" id="protective2ACBonus">
+
+                            </div>
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Weight</label>
+                                <input type="text" class="inputSmall abilityInput" id="protective2Weight">
+                            </div>                          
+                            <div class="BoxColumn blackBGWhiteText">
+                                <label class="underInputTitle">Special Props</label>
+                                <input type="text" class="inputFull abilityInput" id="protective2Props">
+                            </div>             
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!--Skills-->
+                <datalist id="Knowledges">
+                    <option value="Arcana"></option>
+                    <option value="Architecture and engineering"></option>
+                    <option value="Dungeoneering"></option>
+                    <option value="Geography"></option>
+                    <option value="History"></option>
+                    <option value="Local"></option>
+                    <option value="Nature"></option>
+                    <option value="Nobility"></option>
+                    <option value="Religion"></option>
+                    <option value="The Planes"></option>
+                </datalist>
+                <datalist id="Performs">
+                    <option value="Act"></option>
+                    <option value="Comedy"></option>
+                    <option value="Dance"></option>
+                    <option value="Keyboard Instruments"></option>
+                    <option value="Oratory"></option>
+                    <option value="Percussion Instruments"></option>
+                    <option value="String Instruments"></option>
+                    <option value="Nobility"></option>
+                    <option value="Wind Instruments"></option>
+                    <option value="Sing"></option>
+                </datalist>
+                <fieldset class="BoxWithBorder col-2" id="skills">
+                    <legend>Skills</legend>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder BoxRow boxRowMaxWidthMaxWidth">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle" title="Class Skill">CS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Skill Name</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">Key<br>Ability</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">Skill<br>Mod</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">Ability<br>Mod</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">Ranks</span>
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">Misc<br>Mod</span>
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="appraiseClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Appraise</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="appraiseTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="appraiseCalc" id="appraiseAbility" onchange="CalcTotal('appraise')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="appraiseCalc" id="appraiseRanks" onchange="CalcTotal('appraise')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="appraiseCalc" id="appraiseMisc" onchange="CalcTotal('appraise')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="balanceClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Balance</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="balanceTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="balanceCalc" id="balanceAbility" onchange="CalcTotal('balance')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="balanceCalc" id="balanceRanks" onchange="CalcTotal('balance')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="balanceCalc" id="balanceMisc" onchange="CalcTotal('balance')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="bluffClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Bluff</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="bluffTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="bluffCalc" id="bluffAbility" onchange="CalcTotal('bluff')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                            
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="bluffCalc" id="bluffRanks" onchange="CalcTotal('bluff')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="bluffCalc" id="bluffMisc" onchange="CalcTotal('bluff')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="climbClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Climb</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">STR*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="climbTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="str" readonly tabindex="-1" name="climbCalc" id="climbAbility" onchange="CalcTotal('climb')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="climbCalc" id="climbRanks" onchange="CalcTotal('climb')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="climbCalc" id="climbMisc" onchange="CalcTotal('climb')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="concentrationClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Concentration</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CON</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="concentrationTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="con" readonly tabindex="-1" name="concentrationCalc" id="concentrationAbility" onchange="CalcTotal('concentration')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="concentrationCalc" id="concentrationRanks" onchange="CalcTotal('concentration')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="concentrationCalc" id="concentrationMisc" onchange="CalcTotal('concentration')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="craft1lassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Craft</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="craft1Total">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="craft1Calc" id="craft1Ability" onchange="CalcTotal('craft1')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft1Calc" id="craft1Ranks" onchange="CalcTotal('craft1')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft1Calc" id="craft1Misc" onchange="CalcTotal('craft1')">
+                        </div>
+                    </div><div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="craft2ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Craft</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="craft2Total">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="craft2Calc" id="craft2Ability" onchange="CalcTotal('craft2')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft2Calc" id="craft2Ranks" onchange="CalcTotal('craft2')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft2Calc" id="craft2Misc" onchange="CalcTotal('craft2')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="craft3ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Craft</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="craft3Total">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="craft3Calc" id="craft3Ability" onchange="CalcTotal('craft3')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft3Calc" id="craft3Ranks" onchange="CalcTotal('craft3')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="craft3Calc" id="craft3Misc" onchange="CalcTotal('craft3')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="decipherClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Decipher Script&nbsp;&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="decipherTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="decipherCalc" id="decipherAbility" onchange="CalcTotal('decipher')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="decipherCalc" id="decipherRanks" onchange="CalcTotal('decipher')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="decipherCalc" id="decipherMisc" onchange="CalcTotal('decipher')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="diplomacyClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Diplomacy</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="diplomacyTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="diplomacyCalc" id="diplomacyAbility" onchange="CalcTotal('diplomacy')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="diplomacyCalc" id="diplomacyRanks" onchange="CalcTotal('diplomacy')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="diplomacyCalc" id="diplomacyMisc" onchange="CalcTotal('diplomacy')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="disableDeviceClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Disable Device&nbsp;&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="disableDeviceTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="disableDeviceCalc" id="disableDeviceAbility" onchange="CalcTotal('disableDevice')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="disableDeviceCalc" id="disableDeviceRanks" onchange="CalcTotal('disableDevice')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="disableDeviceCalc" id="disableDeviceMisc" onchange="CalcTotal('disableDevice')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="disguiseClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Disguise</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="disguiseTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="disguiseCalc" id="disguiseAbility" onchange="CalcTotal('disguise')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="disguiseCalc" id="disguiseRanks" onchange="CalcTotal('disguise')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="disguiseCalc" id="disguiseMisc" onchange="CalcTotal('disguise')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="escapeartClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Escape Artist*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="escapeartTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="escapeartCalc" id="escapeartAbility" onchange="CalcTotal('escapeart')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="escapeartCalc" id="escapeartRanks" onchange="CalcTotal('escapeart')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="escapeartCalc" id="escapeartMisc" onchange="CalcTotal('escapeart')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="forgeryClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Forgery</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="forgeryTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="forgeryCalc" id="forgeryAbility" onchange="CalcTotal('forgery')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="forgeryCalc" id="forgeryRanks" onchange="CalcTotal('forgery')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="forgeryCalc" id="forgeryMisc" onchange="CalcTotal('forgery')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="gatherInfolassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Gather Infomation</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="gatherInfoTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="gatherInfoCalc" id="gatherInfoAbility" onchange="CalcTotal('gatherInfo')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="gatherInfoCalc" id="gatherInfoRanks" onchange="CalcTotal('gatherInfo')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="gatherInfoCalc" id="gatherInfoMisc" onchange="CalcTotal('gatherInfo')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="handleAnimalClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Handle Animal&nbsp;&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="handleAnimalTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="handleAnimalCalc" id="handleAnimalAbility" onchange="CalcTotal('handleAnimal')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="handleAnimalCalc" id="handleAnimalRanks" onchange="CalcTotal('handleAnimal')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="handleAnimalCalc" id="handleAnimalMisc" onchange="CalcTotal('handleAnimal')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="healClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Heal</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="healTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="healCalc" id="healAbility" onchange="CalcTotal('heal')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="healCalc" id="healRanks" onchange="CalcTotal('heal')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="healCalc" id="healMisc" onchange="CalcTotal('heal')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="hideClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Hide</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="hideTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="hideCalc" id="hideAbility" onchange="CalcTotal('hide')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="hideCalc" id="hideRanks" onchange="CalcTotal('hide')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="hideCalc" id="hideMisc" onchange="CalcTotal('hide')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="intimidateClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Intimidate</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="intimidateTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="intimidateCalc" id="intimidateAbility" onchange="CalcTotal('intimidate')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="intimidateCalc" id="intimidateRanks" onchange="CalcTotal('intimidate')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="intimidateCalc" id="intimidateMisc" onchange="CalcTotal('intimidate')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="JumpClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Jump</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">STR*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="JumpTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="str" readonly tabindex="-1" name="JumpCalc" id="JumpAbility" onchange="CalcTotal('Jump')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="JumpCalc" id="JumpRanks" onchange="CalcTotal('Jump')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="JumpCalc" id="JumpMisc" onchange="CalcTotal('Jump')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="Knowledge1ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Knowledge&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="Knowledge1" list="Knowledges">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="Knowledge1Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="Knowledge1Calc" id="Knowledge1Ability" onchange="CalcTotal('Knowledge1')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge1Calc" id="Knowledge1Ranks" onchange="CalcTotal('Knowledge1')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge1Calc" id="Knowledge1Misc" onchange="CalcTotal('Knowledge1')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="knowledge2ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Knowledge&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="Knowledge2" list="Knowledges">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="Knowledge2Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="Knowledge2Calc" id="Knowledge2Ability" onchange="CalcTotal('Knowledge2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge2Calc" id="Knowledge2Ranks" onchange="CalcTotal('Knowledge2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge2Calc" id="Knowledge2Misc" onchange="CalcTotal('Knowledge2')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="knowledge3ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Knowledge&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="Knowledge3" list="Knowledges">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="Knowledge3Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="Knowledge3Calc" id="Knowledge3Ability" onchange="CalcTotal('Knowledge3')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge3Calc" id="Knowledge3Ranks" onchange="CalcTotal('Knowledge3')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge3Calc" id="Knowledge3Misc" onchange="CalcTotal('Knowledge3')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="knowledge4ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Knowledge&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="Knowledge4" list="Knowledges">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="Knowledge4Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="Knowledge4Calc" id="Knowledge4Ability" onchange="CalcTotal('Knowledge4')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge4Calc" id="Knowledge4Ranks" onchange="CalcTotal('Knowledge4')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge4Calc" id="Knowledge4Misc" onchange="CalcTotal('Knowledge4')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="knowledge5ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Knowledge&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="Knowledge5" list="Knowledges">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="Knowledge5Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="Knowledge5Calc" id="Knowledge5Ability" onchange="CalcTotal('Knowledge5')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge5Calc" id="Knowledge5Ranks" onchange="CalcTotal('Knowledge5')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="Knowledge5Calc" id="Knowledge5Misc" onchange="CalcTotal('Knowledge5')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="listenClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Listen</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="listenTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="listenCalc" id="listenAbility" onchange="CalcTotal('listen')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="listenCalc" id="listenRanks" onchange="CalcTotal('listen')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="listenCalc" id="listenMisc" onchange="CalcTotal('listen')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="moveClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Move Silently</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="moveTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="moveCalc" id="moveAbility" onchange="CalcTotal('move')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="moveCalc" id="moveRanks" onchange="CalcTotal('move')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="moveCalc" id="moveMisc" onchange="CalcTotal('move')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="openLockClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Open Lock&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="openLockTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="openLockCalc" id="openLockAbility" onchange="CalcTotal('openLock')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="openLockCalc" id="openLockRanks" onchange="CalcTotal('openLock')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="openLockCalc" id="openLockMisc" onchange="CalcTotal('openLock')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="perform1ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Perform&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="perform1" list="Performs">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="perform1Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="perform1Calc" id="perform1Ability" onchange="CalcTotal('perform1')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform1Calc" id="perform1Ranks" onchange="CalcTotal('perform1')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform1Calc" id="perform1Misc" onchange="CalcTotal('perform1')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="perform2ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Perform&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="perform2" list="Performs">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="perform2Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="perform2Calc" id="perform2Ability" onchange="CalcTotal('perform2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform2Calc" id="perform2Ranks" onchange="CalcTotal('perform2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform2Calc" id="perform2Misc" onchange="CalcTotal('perform2')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="perform3ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Perform&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="perform3" list="Performs">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="perform3Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="perform3Calc" id="perform3Ability" onchange="CalcTotal('perform3')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform3Calc" id="perform3Ranks" onchange="CalcTotal('perform3')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="perform3Calc" id="perform3Misc" onchange="CalcTotal('perform3')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="professionClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Profession&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="profession">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="professionTotal">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="professionCalc" id="professionAbility" onchange="CalcTotal('profession')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="professionCalc" id="professionRanks" onchange="CalcTotal('profession')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="professionCalc" id="professionMisc" onchange="CalcTotal('profession')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="profession2ClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Profession&#9632;<br>(<input type="text" class="inputSkillSubPick inputfullFont" id="profession2">)</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="profession2Total">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="profession2Calc" id="profession2Ability" onchange="CalcTotal('profession2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="profession2Calc" id="profession2Ranks" onchange="CalcTotal('profession2')">
+                        </div>
+                        <div class="BoxColumn twoLineSkillMathCol">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="profession2Calc" id="profession2Misc" onchange="CalcTotal('profession2')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="rideClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Ride</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="rideTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="rideCalc" id="rideAbility" onchange="CalcTotal('ride')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="rideCalc" id="rideRanks" onchange="CalcTotal('ride')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="rideCalc" id="rideMisc" onchange="CalcTotal('ride')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="searchClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Search</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="searchTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="searchCalc" id="searchAbility" onchange="CalcTotal('search')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="searchCalc" id="searchRanks" onchange="CalcTotal('search')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="searchCalc" id="searchMisc" onchange="CalcTotal('search')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="senseMotiveClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Sense Motive</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="senseMotiveTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="senseMotiveCalc" id="senseMotiveAbility" onchange="CalcTotal('senseMotive')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="senseMotiveCalc" id="senseMotiveRanks" onchange="CalcTotal('senseMotive')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="senseMotiveCalc" id="senseMotiveMisc" onchange="CalcTotal('senseMotive')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="sohClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Sleight of Hand&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="sohTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="sohCalc" id="sohAbility" onchange="CalcTotal('soh')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="sohCalc" id="sohRanks" onchange="CalcTotal('soh')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="sohCalc" id="sohMisc" onchange="CalcTotal('soh')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="spellcraftClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Spellcraft&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">INT</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="spellcraftTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="int" readonly tabindex="-1" name="spellcraftCalc" id="spellcraftAbility" onchange="CalcTotal('spellcraft')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="spellcraftCalc" id="spellcraftRanks" onchange="CalcTotal('spellcraft')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="spellcraftCalc" id="spellcraftMisc" onchange="CalcTotal('spellcraft')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="survivalClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Survival</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">WIS</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="survivalTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="wis" readonly tabindex="-1" name="survivalCalc" id="survivalAbility" onchange="CalcTotal('survival')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="survivalCalc" id="survivalRanks" onchange="CalcTotal('survival')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="survivalCalc" id="survivalMisc" onchange="CalcTotal('survival')">
+                        </div>
+                    </div>
+
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="swimClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Swim</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">STR*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="swimTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="str" readonly tabindex="-1" name="swimCalc" id="swimAbility" onchange="CalcTotal('swim')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="swimCalc" id="swimRanks" onchange="CalcTotal('swim')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="swimCalc" id="swimMisc" onchange="CalcTotal('swim')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="tumbleClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Tumble</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX*</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="tumbleTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="tumbleCalc" id="tumbleAbility" onchange="CalcTotal('tumble')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="tumbleCalc" id="tumbleRanks" onchange="CalcTotal('tumble')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="tumbleCalc" id="tumbleMisc" onchange="CalcTotal('tumble')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="umdClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Use Magic Device&#9632;</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">CHA</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="umdTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="cha" readonly tabindex="-1" name="umdCalc" id="umdAbility" onchange="CalcTotal('umd')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="umdCalc" id="umdRanks" onchange="CalcTotal('umd')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="umdCalc" id="umdMisc" onchange="CalcTotal('umd')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth skillRowBorder">
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle"><input type="checkbox" id="ropeClassSkill"></span>
+                        </div>
+                        <div class="BoxColumn  skillColumnName col-7">
+                            <span class="ColumnTitle">Use Rope</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <span class="ColumnTitle">DEX</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  readonly tabindex="-1" disabled id="ropeTotal">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">=</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput"  data-mod="dex" readonly tabindex="-1" name="ropeCalc" id="ropeAbility" onchange="CalcTotal('rope')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="ropeCalc" id="ropeRanks" onchange="CalcTotal('rope')">
+                        </div>
+                        <div class="BoxColumn MathColumn">
+                            <span class="ColumnTitle">+</span>
+                        </div>
+                        <div class="BoxColumn  skillColumn col-7">
+                            <input type="number" class="inputfull abilityInput" name="ropeCalc" id="ropeMisc" onchange="CalcTotal('rope')">
+                        </div>
+                    </div>
+                    <div class="BoxRow boxRowMaxWidth">
+                        <ul class="reminderText">
+                            <li>&#9632;: Must be Trained</li>
+                            <li>*: Armor Check Penalty Applies.(Double for swim)</li>
+                        </ul>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="BoxRow boxRowMaxWidth">
+                    <fieldset class="BoxWithBorder Box4ths" id="possessions">
+                        <legend>Other Possessions</legend>
+                            <textarea class="textArealg" id="otherPossessions"></textarea>
+                            <div class="BoXRow">
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Light load</label>
+                                    <input type="number" class="inputMed" id="lightLoad">
+                                </div>
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Medium load</label>
+                                    <input type="number" class="inputMed" id="medLoad">
+                                </div>
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Heavy load</label>
+                                    <input type="number" class="inputMed" id="heavyLoad">
+                                </div>
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Lift Over Head</label>
+                                    <input type="number" class="inputMed" id="overHead">
+                                </div>
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Lift Off Ground</label>
+                                    <input type="number" class="inputMed" id="offGround">
+                                </div>
+                                <div class="BoxColumn">
+                                    <label class="underInputTitle">Push/Drag</label>
+                                    <input type="number" class="inputMed" id="pushOrDrag">
+                                </div>
+                            </div>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder Box4ths" id="feats">
+                        <legend>Feats</legend>
+                        <textarea class="textArealg fullHight" id="featsArea"></textarea>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder Box4ths" id="specialAbilities">
+                        <legend>Special Abilities</legend>
+                        <textarea class="textArealg fullHight" id="specialAbilityArea"></textarea>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder Box4ths" id="languages">
+                        <legend title="Initial languages = Common + racial languages + one per point of Int bonus">Langauges</legend>
+                        <textarea class="textArealg fullHight" id="languagesArea"></textarea>
+                    </fieldset>
+            </div>
+            <div class="BoxRow boxRowMaxWidth" id="money">
+                <fieldset class="BoxWithBorder">
+                    <legend>Money</legend>
+                    <div class="BoxRow boxRowMaxWidth">
+                    <div class="BoxColumn col-4">
+                        <label>CP -&nbsp;<input type="number" id="cp" class="inputMed"></label>
+                    </div>
+                    <div class="BoxColumn col-4">
+                        <label>SP -&nbsp;<input type="number" id="sp" class="inputMed"></label>
+                    </div>
+                    <div class="BoxColumn col-4">
+                        <label>GP -&nbsp;<input type="number" id="gp" class="inputMed"></label>
+                    </div>
+                    <div class="BoxColumn col-4">
+                        <label>PP -&nbsp;<input type="number" id="pp" class="inputMed"></label>
+                    </div>
+                    </div>
+                </fieldset>
+            </div>
+            <fieldset class="BoxWithBorder boxRowMaxWidth" id="Spells">
+                <legend>Spells</legend>
+                <div class="BoxRow">
+                    <div class="BoxColumn">
+                        <label class="bgTextHeight">Spell Save &nbsp;<input type="number" class="inputSmall" id="spellSaveBade"></label>
+                    </div>
+                    <div class="BoxColumn">
+                        <label class="bgTextHeight">Spell Failure:&nbsp;<input type="number" class="inputSmall" id="SpellFailure">&nbsp;%</label>
+                    </div>
+                </div>
+                <div class="BoxRow boxRowMaxWidth">
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 0</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl0SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl0PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl0DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl0Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl0Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 1</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl1SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl1PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl1DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl1Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl1Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset><fieldset class="BoxWithBorder col-3">
+                        <legend>Level 2</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl2SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl2PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl2DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl2Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl2Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="BoxRow boxRowMaxWidth">
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 3</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl3SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl3PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl3DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl3Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl3Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 4</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl4SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl4PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl4DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl4Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl4Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset><fieldset class="BoxWithBorder col-3">
+                        <legend>Level 5</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl5SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl5PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl5DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl5Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl5Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="BoxRow boxRowMaxWidth">
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 6</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl6SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl6PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl6DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl6Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl6Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 7</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl7SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl7PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl7DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl7Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl7Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 8</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl8SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl8PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl8DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl8Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl8Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="BoxRow boxRowMaxWidth">
+                    <fieldset class="BoxWithBorder col-3">
+                        <legend>Level 9</legend>
+                        <div class="BoxRow">
+                            <div class="BoxColumn">
+                                <label>Spells Known:<input type="number" class="inputsmaller" id="lvl9SpellsKnown"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spells Per Day:<input type="number" class="inputsmaller" id="lvl9PerDay"></label>
+                            </div>
+                            <div class="BoxColumn">
+                                <label>Spell DC:<input type="number" class="inputsmaller" id="lvl9DC"></label>
+                            </div>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Known Spells</legend>
+                                <textarea class="SpellArea" id="lvl9Known"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="BoxRow boxRowMaxWidth">
+                            <fieldset class="BoxWithBorder boxRowMaxWidth">
+                                <legend>Prepared Spells</legend>
+                                <textarea class="SpellArea" id="lvl9Prep"></textarea>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            
+        </div>
+
+    </body>
+    <script>
+        function HideShow(id,show)
+        {
+            var divToShowHide = document.getElementById(id);
+            if (divToShowHide != null)
+            {
+                divToShowHide.style.display = show ? "flex" : "none"
+            }
+        }
+
+        function OnAblityScoreChange(ability,score)
+        {
+            //do math
+            var mod = 0;
+            console.log(ability + ": " + isNaN(score))
+            if(isNaN(score) || score == "")
+            {
+                document.getElementById(ability + "Mod").value = "";
+            }
+            else
+            {
+                mod = Math.floor((score - 10) / 2);
+                document.getElementById(ability + "Mod").value = mod;
+            }   
+            //update the boxes
+            ability = ability.replace("temp","").toLowerCase();
+            console.log(ability)
+            var tempMod = document.getElementById("temp" + ability.charAt(0).toUpperCase() + ability.slice(1)+"Mod").value
+            var baseMod = document.getElementById(ability + "Mod").value ;
+            if(tempMod != "")
+            {
+                var intTempMod = parseInt(tempMod);
+                if(!isNaN(intTempMod) && tempMod != "")
+                {
+                    mod = intTempMod;
+                }
+            }
+            else
+            {
+                var intMod =parseInt(baseMod)
+                if(!isNaN(intMod) && baseMod != "")
+                {
+                    mod = intMod;
+                }
+            }
+            UpdateModBoxes(ability,mod);
+        }
+        function UpdateModBoxes(ability,mod)
+        {
+            if(typeof(mod) != "number")
+            {
+                mod = parseInt(mod);
+            }
+            if(!isNaN(mod))
+            {
+                document.querySelectorAll("input[data-mod='" + ability.replace("temp","") +"']").forEach(box =>{
+                    box.value = mod;
+                    if(box.onchange != null)
+                    {
+                        box.onchange();
+                    }
+                })
+            }
+        }
+
+        function CalcTotal(calc)
+        {
+            var total = 0;
+            document.querySelectorAll("input[name='"+calc+"Calc']").forEach(part =>{
+                var partNum = parseInt(part.value)
+                if(!isNaN(partNum))
+                {
+                    total += partNum
+                }
+            })
+            document.getElementById(calc + "Total").value = total
+        }
+        
+        function CalcAc()
+        {
+            var acTotal = 10;
+            var touch = 10;
+            var ff = 10;
+            document.querySelectorAll("input[name='acCalc']").forEach(part =>{
+                var partNum = parseInt(part.value)
+                if(!isNaN(partNum))
+                {
+                    acTotal += partNum
+                }
+            })
+            document.getElementById("acTotal").value = acTotal
+
+            var armor = parseInt(document.getElementById("acArmor").value);
+            var dex = parseInt(document.getElementById("acDex").value);
+            if(!isNaN(armor))
+            {
+                document.getElementById("touchAC").value = acTotal - armor;
+            }
+            else
+            {
+                document.getElementById("touchAC").value = acTotal;
+            }
+            if(!isNaN(dex))
+            {
+                document.getElementById("ffAC").value = acTotal - dex;
+            }
+            else
+            {
+                document.getElementById("ffAC").value = acTotal;
+            }
+        }
+        function Save(usingBroswer)
+        {
+            var inputs = document.querySelectorAll('input');
+            var saveString = "{";
+            for (var i = 0;i < inputs.length; i++)
+            {
+                if(inputs[i].type == "checkbox")
+                {
+                    saveString += '"' + inputs[i].id + '":"' +inputs[i].checked + '",';
+                }
+                else{
+                    saveString += '"' + inputs[i].id + '":"' +inputs[i].value + '",';
+                }
+            }
+            saveString = saveString.slice(0,-1) + '}'
+            if(usingBroswer)
+            {
+                window.localStorage.setItem("Char",saveString)
+            }
+            else{
+                // 1. Create a Blob object with the file content and type.
+                const blob = new Blob([saveString], { type: 'application/json' });
+                
+                // 2. Create a temporary anchor element.
+                const element = document.createElement('a');
+                element.style.display = 'none';
+                document.body.appendChild(element);
+
+                // 3. Generate a downloadable URL for the Blob.
+                element.href = URL.createObjectURL(blob);
+                
+                // 4. Set the download attribute to specify the default filename.
+                var campaignName = document.getElementById("campaign").value;
+                var charName = document.getElementById("characterName").value
+                var playerName = document.getElementById("playerName").value;
+                var filename = (campaignName == "" ? "": campaignName + "_") + (charName == "" ? "" : charName +"_") + playerName;
+                element.download = filename;
+
+                // 5. Simulate a click to trigger the download and then clean up the element.
+                element.click();
+                
+                // 6. Revoke the object URL to free up memory.
+                URL.revokeObjectURL(element.href);
+                document.body.removeChild(element);
+            }
+        }
+        function LoadUsingBroswer()
+        {
+            var str = "";
+            str = window.localStorage.getItem("Char")
+            
+            if(str == "" || str == null)
+            {
+                window.alert("No Character Data to Load.")
+            }
+            else
+            {
+                PopulateWithJSON(str)
+            }
+        }
+        function Load()
+        {
+            document.getElementById("fileElem").click();
+        }
+        function PopulateWithJSON(str)
+        {
+            try{
+                var JsonObj = JSON.parse(str);
+                var keys = Object.keys(JsonObj);
+                keys.forEach(x => {
+                    var element = document.getElementById(x);
+                    if(element.type == "checkbox")
+                    {
+                        element.checked = (JsonObj[x] == "true");
+                        if(element.onchange != null)
+                        {
+                            element.onchange()
+                        }
+                    }
+                    else
+                    {
+                        element.value = JsonObj[x];
+                    }
+                });
+            }
+            catch{
+                window.alert("Error in data! Please make sure your data is in JSON format.")
+            }
+        }
+        function CompleteUpload()
+        {
+            var file = document.getElementById("fileElem").files[0];
+            if(file != undefined)
+            {
+                var reader = new FileReader();
+                reader.addEventListener("load", () => {
+                // this will then display a text file
+                PopulateWithJSON(reader.result);
+                });
+                reader.readAsText(file)
+            }
+        }
+
+        function Clear(usingBroswer)
+        {
+            if(usingBroswer)
+            {
+                window.localStorage.removeItem("Char");
+            }
+            else
+            {
+                document.querySelectorAll('input').forEach(x =>{
+                    if(x.type == "checkbox")
+                    {
+                        x.checked = (x.id == "showSpells" || x.id == "showCharData");
+                    }
+                    else
+                    {
+                        x.value = "";
+                    }
+                })
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var char = window.localStorage.getItem("Char")
+            if(char != "" && char != null)
+            {
+                LoadUsingBroswer();
+            }
+        });
+    </script>
+</html>

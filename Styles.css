@@ -1,0 +1,348 @@
+.outerBox
+{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 90%;
+    max-width: 90%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+.BoxWithBorder{
+    display: flex;
+    border: 0.25em solid black;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+}
+.BoxWithBorderSm{
+    display: flex;
+    border: 0.1em solid black;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+}
+.attDiv{
+    margin-bottom: 1em;
+    width: 100%;
+}
+.attDiv > div{
+    margin: 0;
+}
+.BoxWithoutBorder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.flex{
+    display: flex;
+}
+.SpellArea{
+    width: 100%;
+    max-height: 16em;
+    min-height: 16em;
+    resize: none;
+}
+/* .skillsBox::before{
+  content: "\A";
+  white-space: pre;
+} */
+.skillsBox
+{
+    display: flex;
+    flex-direction: column;
+    height: 108em;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.PossessionsBox
+{
+    display: flex;
+    flex-direction: column;
+    height: 60em;
+    flex-wrap: wrap;
+    min-width: 50%;
+}
+.BoxRow{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0.5em;
+    row-gap: 0.5em;
+}
+
+.BoxColumn{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    width: auto;
+    flex-wrap: wrap;
+}
+.inputFull{
+    width: 99% !important;
+    max-width: none !important;
+}
+.inputLabelText{
+    font-size: large;
+}
+.inputSmall{
+    max-width: 4em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.inputMed{
+    max-width: 6em;
+}
+.inputSkillSubPick{
+    width: 86%;
+    font-size: small;
+    text-align: center;
+}
+.inputLg{
+    max-width: 12em;
+}
+.inputSmall[list]::-webkit-calendar-picker-indicator,
+.inputMed[list]::-webkit-calendar-picker-indicator,
+.inputSkillSubPick[list]::-webkit-calendar-picker-indicator
+
+ {
+    display: none !important;
+}
+
+.blackBgWhiteText{
+    background-color: black;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+}
+.bgTextHeight{
+    height: fit-content;
+}
+.justifyText{
+    width: 100%;
+    text-align: justify;
+    justify-content: space-evenly;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ColumnTitle{
+    text-align: center;
+    margin-top: auto;
+}
+.verticalCenterText
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ablityColumn{
+    width: 5.25em;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.savingThrowColumn{
+    width: 4em;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.savingThrowColumnName{
+    width: 6em;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.skillColumn{
+    width: 4em;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+.skillColumnName{
+    width: 8em;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+.currentHPcolumn{
+    min-width: 7.5em;
+    max-width: 7.5em;
+}
+.skillRowBorder{
+    border-bottom: 0.1em solid black;
+    min-height: 1.75em;
+}
+#skills{
+    font-size: medium;
+}
+.inputSmallFont{
+    font-size: small;
+}
+#skills > .BoxRow > .BoxColumn > input{
+    font-size: small !important;
+    height: fit-content;
+}
+#savingThrows,#attInfo
+{
+    float: left;
+}
+.textArealg{
+    width: 100%;
+    min-height: 30em;
+    resize: none;
+    columns: 2 50%;
+}
+.MathColumn{
+    min-width: 0.5em;
+    max-width: 0.5em;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+}
+.floatMathCol
+{
+    margin-top: 1%;
+}
+.twoLineSkillMathCol
+{
+    margin-bottom: 1.2%;
+    justify-content: normal;
+}
+.abilityInput
+{
+    text-align: center;
+}
+.fullHight
+{
+    height: 100% !important
+}
+.ablityBox
+{
+    min-width: 24;
+    max-width: fit-content;
+    margin: 0;
+}
+.temp{
+    background-color: lightgray;
+}
+.inputsmaller
+{
+    max-width: 3em;
+    text-align: center;
+}
+.underInputTitle{
+    text-align: center;
+    font-size: medium;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.TopLabel{
+    border: 1px solid black;
+}
+.reminderText{
+    font-size: smaller;
+    padding: 0px;
+    list-style-type: none;
+}
+.Box3rds
+{
+    width: 30%;
+}
+.Box4ths{
+    width: 22%;
+}
+.boxRowMaxWidth{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* basic tags overrides */
+input{
+    font-size: large;
+}
+
+
+body{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-size: large;
+}
+legend{
+    font-size: large !important;
+}
+body{
+    background-color: papayawhip;
+}
+/*col-x classes */
+.col-2
+{
+    width: 47% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-3
+{
+    width: 30% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-4
+{
+    width: 22% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-5{
+    width: 19% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-7{
+    width: 13% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-9
+{
+    width: 9% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+.col-10
+{
+    width: 8% !important;
+    min-width: none !important;
+    max-width: none !important;
+}
+
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

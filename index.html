@@ -17,6 +17,9 @@
                 <div class="BoxColumn">
                     <label class="TopLabel">Auto Fill BAB:<input type="checkbox" id="autoBAB" checked onchange="UpdateLocal('autoBAB',this.checked)"></label>
                 </div>
+                <div class="BoxColumn">
+                    <label class="TopLabel">Role Stat:<input type="checkbox" id="autoBAB" checked onchange="HideShow('rollButtons',this.checked)"></label>
+                </div>
                 <div class="BoxColumn col-7"><button onclick="Save(true)">Save(Broswer)</button></div>
                 <div class="BoxColumn col-7"><button onclick="LoadUsingBroswer()">Load(Broswer)</button></div>
                 <div class="BoxColumn col-7"><button onclick="Save(false)">Save(File)</button></div>
@@ -131,6 +134,11 @@
                 <!--Ability SCores-->
                 <fieldset class="BoxWithBorder col-2" id="abilityScorces">
                     <legend>Ability Scores</legend>
+                    <div class="BoxRow boxRowMaxWidth" id="rollButtons">
+                        <div class="col-2">
+                            <button id="rollStats" onclick="RollStats()">Roll Stats</button>
+                        </div>
+                    </div>
                     <div class="BoxRow boxRowMaxWidth">
                         <div class="BoxColumn ablityColumn col-5">
                             <span class="ColumnTitle">Name</span>

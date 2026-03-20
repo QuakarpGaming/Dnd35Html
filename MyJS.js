@@ -254,6 +254,31 @@ function CalcBab()
         console.log("BAB")
     }
 }
+function RollStats()
+{
+    var statNames = ["str","dex","con","wis","int","cha",]
+    for(var i = 0; i <statNames.length; i++)
+    {
+        console.log(statNames[i])
+        var sum = 0
+        var lowest = 20;
+        for(var o = 0; o<4; o++)
+        {
+            const randomInt = Math.floor(Math.random() * 6) + 1;
+            if(randomInt < lowest)
+                lowest = randomInt
+            sum += randomInt
+            console.log(o + " " + randomInt)
+        }
+        sum -= lowest;
+        console.log(sum)
+        console.log(lowest);
+        document.getElementById(statNames[i]).value = sum;
+        document.getElementById(statNames[i]).onchange();
+    }   
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     var char = window.localStorage.getItem("Char")
     if(char != "" && char != null)

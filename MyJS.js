@@ -216,6 +216,7 @@ function Clear(usingBroswer)
     if(usingBroswer)
     {
         window.localStorage.removeItem("Char");
+        window.localStorage.removeItem("autoBAB")
     }
     else
     {
@@ -247,13 +248,53 @@ function UpdateLocal(what, val)
         })
     }
 }
+
 function CalcBab()
 {
     if(document.getElementById("autoBAB").checked)
     {
-        console.log("BAB")
+        var classLvlBaseStr = document.getElementById("classAndLevel").value
+        if(classLvlBaseStr != null && classLvlBaseStr!= "")
+        {
+            var BabArr = [0,0,0,0]
+            let classLvlArr = classLvlBaseStr.match(new RegExp(/[a-zA-Z]+[\s|,|\/]+[[0-9]+/g))
+            classLvlArr.forEach(x => 
+            {
+                let classAndLevelSeperate = x.split(" ");
+                let i = 1
+                let currentBAB = 0
+                //good BAB
+                //Barbarians,fighters, paladins, and rangers
+                if(classAndLevelSeperate[0].toUpperCase().match(new RegExp(/RAN|BARB|FIG|PAL/)))
+                {
+                    currentBAB = BABData["GOOD"][parseInt(classAndLevelSeperate[1])]
+                }
+                //average BAB
+                //Clerics, druids, monks, and rogues
+                else if(classAndLevelSeperate[0].toUpperCase().match(new RegExp(/CLE|CL|DRU|MON|ROU/)))
+                {
+                    currentBAB = BABData["AVG"][parseInt(classAndLevelSeperate[1])]
+                }
+                //poor BAB
+                //Sorcerers and wizards
+                else if(classAndLevelSeperate[0].toUpperCase().match(new RegExp(/SOR|WIS/)))
+                {
+                    currentBAB = BABData["POOR"][parseInt(classAndLevelSeperate[1])]
+                }
+                BabArr[0] += currentBAB
+                    while(currentBAB - 5 > 0)
+                    {
+                        currentBAB -= 5;
+                        BabArr[i] += currentBAB;
+                        i++;
+                    }
+            });
+            
+            document.getElementById("bab").value = BabArr.join(", ")
+        };
     }
 }
+
 function RollStats()
 {
     var statNames = ["str","dex","con","wis","int","cha",]
@@ -286,4 +327,11 @@ document.addEventListener("DOMContentLoaded", function() {
         LoadUsingBroswer();
     }
     document.getElementById("autoBAB").checked = (window.localStorage.getItem("autoBAB") == 'true')
+
 });
+
+var BABData = {
+    "GOOD": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    "AVG" : [0,0,1,2,3,3,4,5,6,6,7,8,9,9,10,11,12,12,13,14,15],
+    "POOR": [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10]
+}

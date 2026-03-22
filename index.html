@@ -16,7 +16,7 @@
                     <label class="TopLabel">Spells<input type="checkbox" id="showSpells" checked onchange="HideShow('spells',this.checked)"></label>
                 </div>
                 <div class="BoxColumn">
-                    <label class="TopLabel">Auto Fill BAB:<input type="checkbox" id="autoBAB" checked onchange="UpdateLocal('autoBAB',this.checked)"></label>
+                    <label class="TopLabel">Auto Fill BAB:<input type="checkbox" id="autoBAB"  onchange="UpdateLocal('autoBAB',this.checked)"></label>
                 </div>
                 <div class="BoxColumn">
                     <label class="TopLabel">Role Stat:<input type="checkbox" id="autoBAB" checked onchange="HideShow('rollButtons',this.checked)"></label>
@@ -552,8 +552,8 @@
                         <div class="BoxColumn">
                             <span class="blackBgWhiteText bgTextHeight verticalCenterText">Base Attack bonus</span>
                         </div>
-                        <div class="BoxColumn">
-                            <input type="number" class="inputSmall abilityInput" id="bab" data-disableReadonly="autoBAB" onchange="UpdateModBoxes('bab',this.value)">
+                        <div class="BoxColumn col-3">
+                            <input type="text" class="inputFull abilityInput" id="bab" data-disableReadonly="autoBAB" onchange="UpdateModBoxes('bab',this.value)">
                         </div>
                         <div class="BoxColumn">
                             <span class="blackBgWhiteText bgTextHeight verticalCenterText">Spell Resistance</span>
